@@ -47,6 +47,18 @@ ll inverse(ll a, ll n) {
     return t;
 }
 
+inline ll mult(ll a, ll b, ll m){
+    return ((a%m)*(b%m))%m;
+}
+
+ll fast_pow(ll a, ll b, ll m) {
+    if (b == 0) { return 1; } if (b == 1) { return a; }
+    ll res = fast_pow(a, b/2, m);
+    res = mult(res, res, m);
+    if (b % 2) res = mult(res, a, m);
+    return res;
+}
+
 pair<ll,ll> get_p_q(ll n) {
     vector<ll> factors = factorize(n);
     for (auto f : factors)
@@ -60,9 +72,14 @@ pair<ll,ll> get_p_q(ll n) {
 }
 
 int main() {
-    ll e, n;
+    ll e, n, msg;
     // Lê chave pública
-    cin >> e >> n;
+    cout << "Mensagem cifrada (number): ";
+    cin >> msg;
+    cout << "E (number):";
+    cin >> e;
+    cout << "N (number): ";
+    cin >> n;
     auto [p, q] = get_p_q(n);
     // Significaa que n é inválido (decisão ded projeto)
     if (p == q) {
@@ -78,6 +95,8 @@ int main() {
         return 1;
     }
 
-    printf("p: %lld\nq: %lld\ne: %lld\nd: %lld\nn: %lld", p, q, e, d, n);
+    ll res = fast_pow(msg, d, n);
+
+    printf("p: %lld\nq: %lld\ne: %lld\nd: %lld\nn: %lld\nTexto plano: %lld\n", p, q, e, d, n, res);
     return 0;
 }
