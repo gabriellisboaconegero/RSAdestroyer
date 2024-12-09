@@ -72,13 +72,17 @@ pair<ll,ll> get_p_q(ll n) {
 }
 
 int main() {
-    ll e, n, msg;
-    // Lê chave pública
-    cout << "Mensagem cifrada (number): ";
+    ll e, n;
+#ifdef DECRYPT
+    ll msg;
+    cout << "Mensagem cifrada (apenas um numero): ";
     cin >> msg;
-    cout << "E (number):";
+#endif
+    // Lê chave pública
+    cout << "Informa a chave pública, formato (E, N)" << endl;
+    cout << "E (numero):";
     cin >> e;
-    cout << "N (number): ";
+    cout << "N (numero): ";
     cin >> n;
     auto [p, q] = get_p_q(n);
     // Significaa que n é inválido (decisão ded projeto)
@@ -95,8 +99,11 @@ int main() {
         return 1;
     }
 
+    printf("p: %lld\nq: %lld\ne: %lld\nd: %lld\nn: %lld\n", p, q, e, d, n);
+#ifdef DECRYPT
     ll res = fast_pow(msg, d, n);
+    printf("Texto plano: %lld\n", res);
+#endif
 
-    printf("p: %lld\nq: %lld\ne: %lld\nd: %lld\nn: %lld\nTexto plano: %lld\n", p, q, e, d, n, res);
     return 0;
 }
