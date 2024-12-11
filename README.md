@@ -1,3 +1,7 @@
+# Alunos
+- Gabriel Lisboa Conegero: GRR20221255
+- Daniel Celestino de Lins Neto: GRR20220064
+
 # Relatório
 A escolha para "quebrar" o RSA foi fatorar o valor n da chave pública e recalcular
 a chave privada como é feito na hora de criptografar.
